@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<p id="output"> </p>
+	<button id="copy" onclick="copyElementText('output')">COPY</button>
+	<input type="" name="" id="output1">
+	<button id="del" onclick="Delete()">DELETE</button>
+	<br>
+	<div class="row">
+	<script>
+		let charArr = ['🇦','🇧','🇨','🇩','🇪','🇫','🇬','🇭','🇮','🇯','🇰','🇱','🇲','🇳','🇴','🇵','🇶','🇷','🇸','🇹','🇺','🇻','🇼','🇽','🇾','🇿'];
+		let charOut = Array();
+		// for(var i=0;i<charArr.length;i++){
+		// 	var btn = document.createElement("BUTTON");
+  // btn.innerHTML = charArr[i];
+  // btn.setAttribute('id','btn'+i);
+  // btn.setAttribute('class','btn btn-primary');
+  // btn.setAttribute('onclick','input("btn'+i+'");');
+  // document.body.appendChild(btn);
+		// }
+		// function input(id){
+		// 	var ele=document.getElementById(id);
+		// 	var out = document.getElementById('output');
+		// 	out.value+=ele.innerHTML+" ";
+		// }
+		function Delete(){
+			charOut.splice(-1,1);
+			var temp = document.getElementById('output1').value;
+			document.getElementById('output1').value=temp.slice(0,-1);
+			update();
+		}
+		function update(){
+			var temp='';
+			var out = document.getElementById('output');
+			for(var i=0;i<charOut.length;i++){
+				temp+=charOut[i]+" ";
+			}
+			//console.log(temp);
+			out.innerHTML=temp;
+		}
+		function copyElementText(id) {
+    var text = document.getElementById(id).innerText;
+    var elem = document.createElement("textarea");
+    document.body.appendChild(elem);
+    elem.value = text;
+    elem.select();
+    document.execCommand("copy");
+    document.body.removeChild(elem);
+}
+		function copy(){
+			var copyText = document.getElementById("output");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999)
+  document.execCommand("copy");
+		}
+		document.addEventListener('keydown', function(event) {
+				if(event.keyCode>64&&event.keyCode<91){
+					charOut.push(charArr[event.keyCode-65]);
+					update();
+					//console.log(charOut);
+				}
+				if(event.keyCode==32){
+						charOut.push(" ");
+					update();
+				}
+});
+	</script>
+	</div>
+</body>
+</html>
